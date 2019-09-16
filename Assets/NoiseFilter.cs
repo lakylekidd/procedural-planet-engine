@@ -2,7 +2,13 @@
 
 public class NoiseFilter
 {
+    NoiseSettings settings;
     Noise noise = new Noise();
+
+    public NoiseFilter(NoiseSettings settings)
+    {
+        this.settings = settings;
+    }
 
     public float Evaluate(Vector3 point)
     {
