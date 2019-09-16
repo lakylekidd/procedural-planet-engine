@@ -14,6 +14,10 @@ public class Planet : MonoBehaviour
     public bool makeSphere = true;
     public ShapeSettings shapeSettings;
     public ColorSettings colorSettings;
+    [HideInInspector]
+    public bool shapeSettingsFoldout;
+    [HideInInspector]
+    public bool colorSettingsFoldout;
 
     public void GeneratePlanet()
     {

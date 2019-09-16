@@ -9,14 +9,20 @@ public class PlanetEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        DrawSettingsEditor(planet.shapeSettings, planet.OnShapeSettingsUpdated);
-        DrawSettingsEditor(planet.colorSettings, planet.OnColorSettingsUpdated);
+        DrawSettingsEditor(planet.shapeSettings, planet.OnShapeSettingsUpdated, ref planet.shapeSettingsFoldout);
+        DrawSettingsEditor(planet.colorSettings, planet.OnColorSettingsUpdated, ref planet.colorSettingsFoldout);
     }
 
-    private void DrawSettingsEditor(Object settings, System.Action onSettingsUpdated)
+    private void DrawSettingsEditor(Object settings, System.Action onSettingsUpdated, ref bool foldout)
     {
-        Editor editor = CreateEditor(settings);
-        editor.OnInspectorGUI();
+        foldout = EditorGUILayout.InspectorTitlebar(foldout, settings);
+
+        if (foldout)
+        {
+            Editor editor = CreateEditor(settings);
+            editor.OnInspectorGUI();
+        }
+                
         onSettingsUpdated?.Invoke();
     }
 
