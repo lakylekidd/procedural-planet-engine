@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShapeGenerator : MonoBehaviour
+public class ShapeGenerator
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private ShapeSettings settings;
 
-    // Update is called once per frame
-    void Update()
+    public ShapeGenerator(ShapeSettings settings)
     {
-        
+        this.settings = settings;
+    } 
+
+    public Vector3 CalculatePointOnSphere(Vector3 pointOnUnitSphere)
+    {
+        return pointOnUnitSphere * settings.planetRadius;
     }
 }
