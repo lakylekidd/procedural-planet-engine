@@ -9,6 +9,7 @@ public class Planet : MonoBehaviour
     private Face[] terrainFaces;
     private ShapeGenerator shapeGenerator;
 
+    public bool autoUpdate = true;
     [Range(2, 256)]
     public int resolution = 20;
     public bool makeSphere = true;
@@ -28,14 +29,21 @@ public class Planet : MonoBehaviour
 
     public void OnColorSettingsUpdated()
     {
-        Initialize();
-        GenerateColors();
+        if (autoUpdate)
+        {
+            Initialize();
+            GenerateColors();
+        }
+        
     }
 
     public void OnShapeSettingsUpdated()
     {
-        Initialize();
-        GenerateMesh();
+        if (autoUpdate)
+        {
+            Initialize();
+            GenerateMesh();
+        }
     }
 
     private void Initialize()
