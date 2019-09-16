@@ -10,6 +10,7 @@ public class Planet : MonoBehaviour
 
     [Range(2, 256)]
     public int resolution = 20;
+    public bool makeSphere = true;
 
     private void Initialize()
     {
@@ -37,7 +38,7 @@ public class Planet : MonoBehaviour
                 meshFilters[i].sharedMesh = new Mesh();
             }
             // Create the new face
-            terrainFaces[i] = new Face(meshFilters[i].sharedMesh, resolution, directions[i]);
+            terrainFaces[i] = new Face(meshFilters[i].sharedMesh, resolution, directions[i], makeSphere);
         }
     }
 

@@ -7,12 +7,14 @@ public class Face
     private Vector3 localUp;
     private Vector3 axisA;
     private Vector3 axisB;
+    private bool makeSphere;
 
-    public Face(Mesh mesh, int resolution, Vector3 localUp)
+    public Face(Mesh mesh, int resolution, Vector3 localUp, bool makeSphere = true)
     {
         this.mesh = mesh;
         this.resolution = resolution;
         this.localUp = localUp;
+        this.makeSphere = makeSphere;
 
         axisA = new Vector3(localUp.y, localUp.z, localUp.x);
         axisB = Vector3.Cross(localUp, axisA);
@@ -33,7 +35,7 @@ public class Face
                 Vector2 percent = new Vector2(x, y) / (resolution - 1);
                 // Calculate the point on the cube
                 Vector3 pointOnUnitCube = localUp + (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
-                Vector3 poingOnUnitSphere = pointOnUnitCube.normalized;
+                Vector3 poingOnUnitSphere = (makeSphere ? pointOnUnitCube.normalized : pointOnUnitCube);
 
                 // Add the vertex
                 vertices[i] = poingOnUnitSphere;
