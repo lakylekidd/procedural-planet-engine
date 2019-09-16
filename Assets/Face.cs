@@ -42,8 +42,6 @@ public class Face
                 // Add the vertex
                 vertices[i] = shapeGenerator.CalculatePointOnSphere(pointOnUnitSphere);
 
-                Debug.Log("Vertex :: " + pointOnUnitCube.ToString());
-
                 // Check if the current x is not the last point in the row
                 // and that the y is not the last point on the column.
                 if (x != resolution - 1 && y != resolution - 1)
