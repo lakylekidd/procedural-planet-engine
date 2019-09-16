@@ -1,18 +1,68 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Face : MonoBehaviour
+public class Face
 {
-    // Start is called before the first frame update
-    void Start()
+    private Mesh mesh;
+    private int resolution;
+    private Vector3 localUp;
+    private Vector3 axisA;
+    private Vector3 axisB;
+
+    public Face(Mesh mesh, int resolution, Vector3 localUp)
     {
-        
+        this.mesh = mesh;
+        this.resolution = resolution;
+        this.localUp = localUp;
+
+        axisA = new Vector3(localUp.y, localUp.z, localUp.x);
+        axisB = Vector3.Cross(localUp, axisA);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ConstructMesh()
     {
-        
+        Vector3[] vertices = new Vector3[resolution * resolution];
+        int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6 ];
+        int triIndex = 0;
+
+        for (int y = 0; y < resolution; y++)
+        {
+            for (int x = 0; x < resolution; x++)
+            {
+                // Calculate the current index of the vertex
+                int i = x + y * resolution;
+                Vector2 percent = new Vector2(x, y) / (resolution - 1);
+                // Calculate the point on the cube
+                Vector3 pointOnUnitCube = localUp + (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
+
+                // Add the vertex
+                vertices[i] = pointOnUnitCube;
+
+                Debug.Log("Vertex :: " + pointOnUnitCube.ToString());
+
+                // Check if the current x is not the last point in the row
+                // and that the y is not the last point on the column.
+                if (x != resolution - 1 && y != resolution - 1)
+                {
+                    triangles[triIndex] = i;
+                    triangles[triIndex + 1] = i + resolution + 1;
+                    triangles[triIndex + 2] = i + resolution;
+
+                    triangles[triIndex + 3] = i;
+                    triangles[triIndex + 4] = i + 1;
+                    triangles[triIndex + 5] = i + resolution + 1;
+
+                    triIndex += 6;
+                }
+            }
+        }
+
+        // Clear all data from the mesh
+        mesh.Clear();
+
+        // Assign the vertices and triangles
+        // and recalculate normals of mesh
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
     }
 }
