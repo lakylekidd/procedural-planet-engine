@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
@@ -92,9 +90,4 @@ public class Planet : MonoBehaviour
             m.GetComponent<MeshRenderer>().sharedMaterial.color = colorSettings.planetColor;
         }
     }
-
-    //private void OnValidate()
-    //{
-    //    GeneratePlanet();
-    //}
 }
