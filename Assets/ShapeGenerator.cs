@@ -13,6 +13,7 @@ public class ShapeGenerator
 
     public Vector3 CalculatePointOnSphere(Vector3 pointOnUnitSphere)
     {
-        return pointOnUnitSphere * settings.planetRadius;
+        float elevation = noiseFilter.Evaluate(pointOnUnitSphere);
+        return pointOnUnitSphere * settings.planetRadius * (1 + elevation);
     }
 }
