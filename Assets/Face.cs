@@ -33,9 +33,10 @@ public class Face
                 Vector2 percent = new Vector2(x, y) / (resolution - 1);
                 // Calculate the point on the cube
                 Vector3 pointOnUnitCube = localUp + (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
+                Vector3 poingOnUnitSphere = pointOnUnitCube.normalized;
 
                 // Add the vertex
-                vertices[i] = pointOnUnitCube;
+                vertices[i] = poingOnUnitSphere;
 
                 Debug.Log("Vertex :: " + pointOnUnitCube.ToString());
 
