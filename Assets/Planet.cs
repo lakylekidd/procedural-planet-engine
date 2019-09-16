@@ -85,8 +85,8 @@ public class Planet : MonoBehaviour
         }
     }
 
-    private void OnValidate()
-    {
-        GeneratePlanet();
-    }
+    //private void OnValidate()
+    //{
+    //    GeneratePlanet();
+    //}
 }
