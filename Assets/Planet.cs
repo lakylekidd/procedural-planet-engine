@@ -11,6 +11,20 @@ public class Planet : MonoBehaviour
     [Range(2, 256)]
     public int resolution = 20;
     public bool makeSphere = true;
+    public ShapeSettings shapeSettings;
+    public ColorSettings colorSettings;
+
+    public void OnColorSettingsUpdated()
+    {
+        Initialize();
+        GenerateColors();
+    }
+
+    public void OnShapeSettingsUpdated()
+    {
+        Initialize();
+        GenerateMesh();
+    }
 
     private void Initialize()
     {
@@ -47,6 +61,14 @@ public class Planet : MonoBehaviour
         foreach(Face face in terrainFaces)
         {
             face.ConstructMesh();
+        }
+    }
+
+    private void GenerateColors()
+    {
+        foreach (MeshFilter m in meshFilters)
+        {
+            m.GetComponent<MeshRenderer>().sharedMaterial.color = colorSettings.planetColor;
         }
     }
 
