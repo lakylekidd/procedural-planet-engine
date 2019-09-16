@@ -18,6 +18,10 @@ public class PlanetEditor : Editor
                 planet.GeneratePlanet();
             }
         }
+
+        // Draw button to generate planet on click
+        if (GUILayout.Button("Generate Planet"))
+            planet.GeneratePlanet();
         
         // Begin drawing the color and spahe settings editor items
         DrawSettingsEditor(planet.shapeSettings, planet.OnShapeSettingsUpdated, ref planet.shapeSettingsFoldout, ref shapeEditor);
